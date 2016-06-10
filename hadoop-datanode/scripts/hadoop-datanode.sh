@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Update clustername
+/etc/scripts/cluster_name.sh
+
 #Start serf
 /etc/serf/start-ssh-serf.sh
 

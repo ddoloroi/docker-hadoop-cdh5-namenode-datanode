@@ -10,6 +10,7 @@ RUN mv /tmp/jdk1.8.0_91 /usr/share/
 #set java environment
 ENV JAVA_HOME /usr/share/jdk1.8.0_91
 ENV PATH $JAVA_HOME/bin:$PATH
+ENV clustername ${clustername}
 
 #Install CDH repo
 RUN curl -Lso cloudera-cdh-5-0.x86_64.rpm https://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm

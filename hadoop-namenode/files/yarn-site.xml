@@ -20,30 +20,30 @@
 <configuration>
 <property>
     <name>yarn.resourcemanager.resource-tracker.address</name>
-    <value>namenode.tin.local:8031</value>
- 
+    <value>ClusterName:8031</value>
+
 </property>
- 
+
   <property>
     <name>yarn.resourcemanager.address</name>
-    <value>namenode.tin.local:8032</value>
+    <value>ClusterName:8032</value>
   </property>
- 
+
   <property>
     <name>yarn.resourcemanager.scheduler.address</name>
-    <value>namenode.tin.local:8030</value>
+    <value>ClusterName:8030</value>
   </property>
- 
+
   <property>
     <name>yarn.resourcemanager.admin.address</name>
-    <value>namenode.tin.local:8033</value>
+    <value>ClusterName:8033</value>
   </property>
- 
+
   <property>
     <name>yarn.resourcemanager.webapp.address</name>
-    <value>namenode.tin.local:8088</value>
+    <value>ClusterName:8088</value>
   </property>
- 
+
   <property>
     <description>Classpath for typical applications.</description>
     <name>yarn.application.classpath</name>
@@ -55,27 +55,27 @@
          $HADOOP_YARN_HOME/*,$HADOOP_YARN_HOME/lib/*
      </value>
   </property>
- 
+
   <property>
     <name>yarn.nodemanager.aux-services</name>
     <value>mapreduce_shuffle</value>
   </property>
- 
+
   <property>
     <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
     <value>org.apache.hadoop.mapred.ShuffleHandler</value>
   </property>
- 
+
   <property>
     <name>yarn.nodemanager.local-dirs</name>
     <value>/var/lib/hadoop-hdfs/yarn/local</value>
   </property>
- 
+
   <property>
     <name>yarn.nodemanager.log-dirs</name>
     <value>/var/lib/hadoop-hdfs/yarn/local/logs</value>
   </property>
- 
+
   <property>
     <description>Where to aggregate logs</description>
     <name>yarn.nodemanager.remote-app-log-dir</name>

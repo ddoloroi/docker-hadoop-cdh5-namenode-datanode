@@ -20,6 +20,6 @@
 <configuration>
 	<property>
  	<name>fs.defaultFS</name>
- 	<value>hdfs://namenode.tin.local:9000</value>
+ 	<value>hdfs://ClusterName:9000</value>
 	</property>
 </configuration>

@@ -4,7 +4,8 @@ image=$1
 
 if [ $# = 0 ]
 then
-	echo "Please use image name as the argument!"
+	echo "Please use image name as the argument! "
+	echo "The images name should be: hadoop-namenode and hadoop-datanode"
 	exit 1
 fi
 
@@ -12,25 +13,25 @@ fi
 # founction for delete images
 function docker_rmi()
 {
-	echo -e "\n\nsudo docker rmi tinhuynh/$1"
-	sudo docker rmi tinhuynh/$1
+	echo -e "\n\nsudo docker rmi tinhuynh/$image"
+	sudo docker rmi tinhuynh/$image
 }
 
 
 # founction for build images
 function docker_build()
 {
-	cd $1
-	echo -e "\n\nsudo docker build -t tinhuynh/$1 ."
-	/usr/bin/time -f "real  %e" sudo docker build -t tinhuynh/$1 .
+	cd $image
+	echo -e "\n\nsudo docker build -t tinhuynh/$image ."
+	sudo docker build -t tinhuynh/$image .
 	cd ..
 }
 
 
 if [ $image == "hadoop-namenode" ]
 then
-	docker_rmi hadoop-namenode
-	docker_build hadoop-namenode
+	docker_rmi
+	docker_build
 elif [ $image == "hadoop-datanode" ]
 then
 	docker_rmi hadoop-datanode

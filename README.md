@@ -3,5 +3,5 @@
   - ./build-docker-images.sh hadoop-datanode
 
 2. Run start containers
-  - ./start-container.sh number_of_datanode
-  - EX: ./start-container.sh 2
+  - ./start-container.sh number_of_datanode cluster_name
+  - EX: ./start-container.sh 2 master
