@@ -1,20 +1,25 @@
 # Creates hadoop namenode image with serf and dnsmasq
-FROM centos:6.6
+FROM centos:6.8
 
 MAINTAINER Tin Huynh <vantintttp@gmail.com>
 
 #add jdk to images
-ADD software/jdk-8u91-linux-x64.tar.gz /tmp/
-RUN mv /tmp/jdk1.8.0_91 /usr/share/
+ADD software/jdk-8u121-linux-x64.tar.gz /tmp/
+RUN mv /tmp/jdk1.8.0_121 /usr/share/jdk
 
 #set java environment
-ENV JAVA_HOME /usr/share/jdk1.8.0_91
+ENV JAVA_HOME /usr/share/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV clustername ${clustername}
+
 
 #Install CDH repo
 RUN curl -Lso cloudera-cdh-5-0.x86_64.rpm https://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm
 RUN rpm -Uvh cloudera-cdh-5-0.x86_64.rpm
+
+#Install numpy
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y numpy
 
 #Install hadoop namenode
 RUN yum install -y hadoop-yarn-resourcemanager hadoop-hdfs-namenode hadoop-mapreduce-historyserver
@@ -53,8 +58,29 @@ ENV SERF_CONFIG_DIR /etc/serf
 ADD serf/* $SERF_CONFIG_DIR/
 ADD handlers $SERF_CONFIG_DIR/handlers
 
+# Get spark
+RUN useradd spark
+RUN su - spark
+RUN curl -Lso spark.tgz http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.6.tgz
+RUN tar -zxvf spark.tgz
+RUN mv spark-* /usr/share/spark
+ADD files/spark-env.sh /usr/share/spark/conf/ 
+
+ENV SPARK_HOME /usr/share/spark
+ENV PATH $SPARK_HOME/bin:$PATH
+
+# Get zeppelin
+RUN curl -lso zeppelin.tgz http://mirrors.viethosting.com/apache/zeppelin/zeppelin-0.7.0/zeppelin-0.7.0-bin-all.tgz
+RUN tar -zxvf zeppelin.tgz
+RUN mv zeppelin-* /usr/share/zeppelin
+ADD files/zeppelin-env.sh /usr/share/zeppelin/conf/
+ADD files/start-zeppelin.sh /var/lib/hadoop-hdfs/
+RUN chown -R hdfs:hdfs /usr/share/zeppelin
+RUN chmod 755 /var/lib/hadoop-hdfs/start-zeppelin.sh
+RUN chown -R hdfs:hdfs /var/lib/hadoop-hdfs/start-zeppelin.sh
+
 RUN chmod +x  $SERF_CONFIG_DIR/event-router.sh $SERF_CONFIG_DIR/start-serf-agent.sh /etc/scripts/* /etc/serf/start-ssh-serf.sh $SERF_CONFIG_DIR/handlers/*
 
-EXPOSE 22 7373 7946 9000 50010 50020 50070 50075 50090 50475 8030 8031 8032 8033 8040 8042 8060 8088 50060
+EXPOSE 22 7373 7946 9000 50010 50020 50070 50075 50090 50475 8030 8031 8032 8033 8040 8042 8060 8088 50060 8080
 
 CMD '/etc/scripts/hadoop-namenode.sh'; 'bash'

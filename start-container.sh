@@ -17,7 +17,7 @@ ip=$(hostname -I|awk '{print $1}')
 # delete old master container and start new master container
 sudo docker rm -f namenode &> /dev/null
 echo "start namenode container..."
-sudo docker run -d -t --dns 127.0.0.1 -p $ip:50070:50070 -p $ip:8088:8088 --name $clustername -e clustername=$clustername.tin.local -h $clustername.tin.local tinhuynh/hadoop-namenode &> /dev/null
+sudo docker run -d -t --dns 127.0.0.1 -p $ip:50070:50070 -p $ip:8088:8088 -p $ip:9995:8080 --name $clustername -e clustername=$clustername.tin.local -h $clustername.tin.local tinhuynh/hadoop-namenode &> /dev/null
 
 # get the IP address of master container
 FIRST_IP=$(sudo docker inspect --format="{{.NetworkSettings.IPAddress}}" $clustername)

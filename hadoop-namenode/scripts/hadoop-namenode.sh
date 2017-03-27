@@ -13,3 +13,4 @@
 /etc/init.d/hadoop-hdfs-namenode start
 /etc/init.d/hadoop-yarn-resourcemanager start
 /etc/init.d/hadoop-mapreduce-historyserver start
+su -c /var/lib/hadoop-hdfs/start-zeppelin.sh -s /bin/sh hdfs

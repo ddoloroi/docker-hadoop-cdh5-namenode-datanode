@@ -1,19 +1,24 @@
 # Creates a base ubuntu image with serf and dnsmasq
-FROM centos:6.6
+FROM centos:6.8
 
 MAINTAINER Tin Huynh <vantintttp@gmail.com>
 
-ADD software/jdk-8u91-linux-x64.tar.gz /tmp/
-RUN mv /tmp/jdk1.8.0_91 /usr/share/
+ADD software/jdk-8u121-linux-x64.tar.gz /tmp/
+RUN mv /tmp/jdk1.8.0_121 /usr/share/jdk
 
 #set java environment
-ENV JAVA_HOME /usr/share/jdk1.8.0_91
+ENV JAVA_HOME /usr/share/jdk
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV clustername ${clustername}
 
-
+# Install CDH repo
 RUN curl -Lso cloudera-cdh-5-0.x86_64.rpm https://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm
 RUN rpm -Uvh cloudera-cdh-5-0.x86_64.rpm
+
+#Install numpy
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y numpy
+
 
 
 RUN yum install -y hadoop-yarn-nodemanager hadoop-hdfs-datanode hadoop-mapreduce
