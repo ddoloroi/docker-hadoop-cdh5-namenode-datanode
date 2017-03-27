@@ -1,10 +1,12 @@
-Prepare: Download JDK and put in hadoop-namenode/software and hadoop-datanode/software
+
+0. Install Docker on your host
+  - https://docs.docker.com/engine/installation/
 
 1. Run script to build images:
   - ./build-docker-images.sh hadoop-namenode
   - ./build-docker-images.sh hadoop-datanode
 
-2. Run start containers
+2. Run start container
   - ./start-container.sh number_of_datanode cluster_name
   - EX: ./start-container.sh 2 master
 

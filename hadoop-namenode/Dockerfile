@@ -4,7 +4,9 @@ FROM centos:6.8
 MAINTAINER Tin Huynh <vantintttp@gmail.com>
 
 #add jdk to images
-ADD software/jdk-8u121-linux-x64.tar.gz /tmp/
+RUN yum install -y wget
+RUN wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-x64.tar.gz" -P /tmp/
+RUN cd /tmp/ && tar -zxvf jdk-8u121-linux-x64.tar.gz
 RUN mv /tmp/jdk1.8.0_121 /usr/share/jdk
 
 #set java environment
