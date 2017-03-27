@@ -1,3 +1,5 @@
+Prepare: Download JDK and put in hadoop-namenode/software and hadoop-datanode/software
+
 1. Run script to build images:
   - ./build-docker-images.sh hadoop-namenode
   - ./build-docker-images.sh hadoop-datanode
