@@ -17,7 +17,7 @@ ip=$(hostname -I|awk '{print $1}')
 # delete old master container and start new master container
 sudo docker rm -f namenode &> /dev/null
 echo "start namenode container..."
-sudo docker run -d -t --dns 127.0.0.1 -p $ip:50070:50070 -p $ip:8088:8088 -p $ip:9995:8080 --name $clustername -e clustername=$clustername.tin.local -h $clustername.tin.local tinhuynh/hadoop-namenode &> /dev/null
+sudo docker run -d -t --dns 127.0.0.1 -p $ip:50070:50070 -p $ip:9000:9000 -p $ip:19888:19888 -p $ip:8088:8088 -p $ip:9995:8080 --name $clustername -e clustername=$clustername.tin.local -h $clustername.tin.local tinhuynh/hadoop-namenode &> /dev/null
 
 # get the IP address of master container
 FIRST_IP=$(sudo docker inspect --format="{{.NetworkSettings.IPAddress}}" $clustername)
@@ -34,3 +34,16 @@ done
 
 echo "Your cluste name is: $clustername.tin.local"
 fi
+
+echo "Start Hue"
+
+#######################################
+sudo mkdir -p /etc/hue/conf.d
+ip=$(hostname -I|awk '{print $1}')
+sudo cp ./hue/conf/* /etc/hue/conf.d/
+sudo sed -i "s/docker_host/"$ip"/g" /etc/hue/conf.d/hue.ini
+sudo docker run -d -t --dns 127.0.0.1 -p 9998:8888 --name hue -e JOIN_IP=$FIRST_IP -v /etc/hue/conf.d:/hue/desktop/conf tinhuynh/hue
+######################################
+
+echo "Zeppeline Notebook address: $ip:9995"
+echo "Hue address: $ip:9998"

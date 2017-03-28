@@ -14,3 +14,4 @@
 /etc/init.d/hadoop-yarn-resourcemanager start
 /etc/init.d/hadoop-mapreduce-historyserver start
 su -c /var/lib/hadoop-hdfs/start-zeppelin.sh -s /bin/sh hdfs
+su -c "hadoop dfs -mkdir /data" -s /bin/sh hdfs

@@ -83,6 +83,6 @@ RUN chown -R hdfs:hdfs /var/lib/hadoop-hdfs/start-zeppelin.sh
 
 RUN chmod +x  $SERF_CONFIG_DIR/event-router.sh $SERF_CONFIG_DIR/start-serf-agent.sh /etc/scripts/* /etc/serf/start-ssh-serf.sh $SERF_CONFIG_DIR/handlers/*
 
-EXPOSE 22 7373 7946 9000 50010 50020 50070 50075 50090 50475 8030 8031 8032 8033 8040 8042 8060 8088 50060 8080
+EXPOSE 22 7373 7946 9000 50010 50020 50070 50075 50090 50475 8030 8031 8032 8033 8040 8042 8060 8088 50060 8080 19888
 
 CMD '/etc/scripts/hadoop-namenode.sh'; 'bash'
