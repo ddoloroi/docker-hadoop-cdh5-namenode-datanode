@@ -19,7 +19,7 @@ RUN curl -Lso cloudera-cdh-5-0.x86_64.rpm https://archive.cloudera.com/cdh5/one-
 RUN rpm -Uvh cloudera-cdh-5-0.x86_64.rpm
 
 # Install numpy
-RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 RUN yum install -y numpy
 
 
