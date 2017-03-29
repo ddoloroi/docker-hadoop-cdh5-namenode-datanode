@@ -31,6 +31,7 @@
 
 7. Access to Hue
     >http://docker_host:9998
+    >Account: hdfs/hdfs
 
 8. To use zeppelin:
   - Access above url
