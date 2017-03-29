@@ -39,3 +39,8 @@
   - Remove ```zeppelin.spark.useHiveContext```
   - Save this interpreter
   - Create new Notebook and choose this interpreter
+
+
+# Author: 
+- Email: tin@trustingsocial.com
+- Slack: tinhuynh
