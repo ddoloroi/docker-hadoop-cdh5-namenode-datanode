@@ -39,7 +39,6 @@ echo "Start Hue"
 
 #######################################
 sudo mkdir -p /etc/hue/conf.d
-ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1|awk -F " " '{print $2}'|head -1)
 sudo cp ./hue/conf/* /etc/hue/conf.d/
 sudo sed -i "s/docker_host/"$ip"/g" /etc/hue/conf.d/hue.ini
 sudo docker run -d -t --dns 127.0.0.1 -p 9998:8888 --name hue -e JOIN_IP=$FIRST_IP -v /etc/hue/conf.d:/hue/desktop/conf tinhuynh/hue
