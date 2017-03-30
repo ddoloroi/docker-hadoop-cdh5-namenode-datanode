@@ -72,7 +72,7 @@ ENV SPARK_HOME /usr/share/spark
 ENV PATH $SPARK_HOME/bin:$PATH
 
 # Get zeppelin
-RUN curl -lso zeppelin.tgz http://mirrors.viethosting.com/apache/zeppelin/zeppelin-0.7.0/zeppelin-0.7.0-bin-all.tgz
+RUN curl -lso zeppelin.tgz http://www-us.apache.org/dist/zeppelin/zeppelin-0.7.0/zeppelin-0.7.0-bin-all.tgz
 RUN tar -zxvf zeppelin.tgz
 RUN mv zeppelin-* /usr/share/zeppelin
 ADD files/zeppelin-env.sh /usr/share/zeppelin/conf/
